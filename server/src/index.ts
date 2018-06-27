@@ -29,28 +29,30 @@ app.listen(port, function() {
   log('Server listening at port %d', port)
 })
 
-import { client, server } from './App/Service'
+import {IService, DemoService} from './App'
+let service: IService = new DemoService()
 
 /**
  * Test
- 
-let memberId = '001'
-let memberId2 = '002'
-let taskPoint = '001'
-let taskPoint2 = '002'
-console.log(client.memberLogin(memberId))
-console.log(client.memberGetNext(memberId))
-console.log(client.memberCheckin(memberId, taskPoint))
-console.log(client.memberLogin(memberId2))
-console.log(client.memberCheckin(memberId2, taskPoint))
-console.log(client.memberGetNext(memberId))
-console.log(client.memberGetNext(memberId2))
-console.log(client.memberCheckin(memberId, taskPoint2))
-console.log(client.memberCheckin(memberId2, taskPoint2))
-console.log(client.memberGetNext(memberId))
-console.log(client.memberGetNext(memberId2))
+ */
+// let memberId = '001'
+// let memberId2 = '002'
+// let taskPoint = '001'
+// let taskPoint2 = '002'
+// console.log(service.memberLogin(memberId))
+// console.log(service.memberGetNext(memberId))
+// console.log(service.memberCheckin(memberId, taskPoint))
+// console.log(service.memberLogin(memberId2))
+// console.log(service.memberGetNext(memberId))
+// console.log(service.memberCheckin(memberId2, taskPoint))
+// console.log(service.memberGetNext(memberId))
+// console.log(service.memberGetNext(memberId2))
+// console.log(service.memberCheckin(memberId, taskPoint2))
+// console.log(service.memberCheckin(memberId2, taskPoint2))
+// console.log(service.memberGetNext(memberId))
+// console.log(service.memberGetNext(memberId2))
 
-*/
+
 app.use(function(err, req, res, next) {
   console.error(err.stack)
   res.status(500).send('Something broke!')
@@ -58,14 +60,14 @@ app.use(function(err, req, res, next) {
 app.post('/login', function(req, res) {
   console.log('login', req.body)
   let memberId = req.body.memberId
-  res.json(client.memberLogin(memberId))
+  res.json(service.memberLogin(memberId))
 })
 
 app.post('/getNext', function(req, res) {
   console.log('getNext', req.body)
 
   let memberId = req.body.memberId
-  res.json(client.memberGetNext(memberId))
+  res.json(service.memberGetNext(memberId))
 })
 
 app.post('/checkIn', function(req, res) {
@@ -73,23 +75,6 @@ app.post('/checkIn', function(req, res) {
 
   let memberId = req.body.memberId
   let taskPoint = req.body.taskPoint
-  res.json(client.memberCheckin(memberId, taskPoint))
+  res.json(service.memberCheckin(memberId, taskPoint))
 })
 
-import { connection } from './App/Connection'
-connection.connect(function(err) {
-  if (err) throw err
-  console.log('Connected!')
-  connection.query('SELECT * FROM teams', function(err, result) {
-    if (err) throw err
-    console.log('Result: ', result)
-  })
-
-  //update
-  var sql = "UPDATE teams SET taskPoint = 'Canyon 123' WHERE id = 'Valley 345'";
-  connection.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log(result.affectedRows + " record(s) updated");
-  });
-
-})
