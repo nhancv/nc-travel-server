@@ -29,7 +29,7 @@ app.listen(port, function() {
   log('Server listening at port %d', port)
 })
 
-import {IService, DemoService} from './App'
+import { IService, DemoService } from './App'
 let service: IService = new DemoService()
 
 /**
@@ -52,29 +52,29 @@ let service: IService = new DemoService()
 // console.log(service.memberGetNext(memberId))
 // console.log(service.memberGetNext(memberId2))
 
-
 app.use(function(err, req, res, next) {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })
+
 app.post('/login', function(req, res) {
   console.log('login', req.body)
+  res.set('Connection', 'close')
   let memberId = req.body.memberId
   res.json(service.memberLogin(memberId))
 })
 
 app.post('/getNext', function(req, res) {
   console.log('getNext', req.body)
-
+  res.set('Connection', 'close')
   let memberId = req.body.memberId
   res.json(service.memberGetNext(memberId))
 })
 
 app.post('/checkIn', function(req, res) {
   console.log('checkIn', req.body)
-
+  res.set('Connection', 'close')
   let memberId = req.body.memberId
   let taskPoint = req.body.taskPoint
   res.json(service.memberCheckin(memberId, taskPoint))
 })
-
