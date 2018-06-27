@@ -30,7 +30,8 @@ const teams = {
     display: 'Team 1',
     tasks: {
       '001': false,
-      '002': false
+      '002': false,
+      '003': false
     },
     taskPoint: '001'
   }
@@ -54,11 +55,15 @@ const members = {
 const tasks = {
   '001': {
     taskName: 'Task 001',
-    taskDescription: 'Task 001 description'
+    taskDescription: 'GreenHills Front'
   },
   '002': {
     taskName: 'Task 002',
-    taskDescription: 'Task 002 description'
+    taskDescription: 'GreenHills Back'
+  },
+  '003': {
+    taskName: 'Task 003',
+    taskDescription: 'BeeSight Soft'
   }
 }
 
